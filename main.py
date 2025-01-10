@@ -6,15 +6,20 @@ from PIL import Image
 model_name = "best.pt"
 
 def main(): 
-    mode = st.sidebar.selectbox("Model Type", ("Key Detection", "Vin/Odometer")) 
+    mode = st.sidebar.selectbox("Model Type", ("Basic_Remote", "Basic_Remote_Tesla", "Tesla", "Key_Tesla")) 
     uploaded_file = st.file_uploader("Choose image: ")  
 
     if uploaded_file: 
         
-        if mode == "Vin/Odometer": 
-            model = torch.hub.load("ultralytics/yolov5", "custom", path=f"models/{model_name}") 
-        else: 
+        if mode == "Basic_Remote_Tesla": 
+            model = torch.hub.load("ultralytics/yolov5", "custom", path=f"models/basic_remote_tesla.pt") 
+        if mode == "Basic_Remote": 
             model = torch.hub.load("ultralytics/yolov5", "custom", path=f"models/basic_remote.pt") 
+        if mode == "Tesla": 
+            model = torch.hub.load("ultralytics/yolov5", "custom", path=f"models/tesla.pt") 
+        if mode == "Key_Tesla": 
+            model = torch.hub.load("ultralytics/yolov5", "custom", path=f"models/key_tesla.pt") 
+
 
         model = model.eval() 
 
